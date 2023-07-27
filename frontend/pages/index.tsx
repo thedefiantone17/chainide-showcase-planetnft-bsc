@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 
 import moon from "../styles/imgs/moon.png";
+import earth from "../styles/imgs/earth.png";
 import {
   planetContractAbi,
   planetContractAddress,
@@ -67,14 +68,14 @@ export default function Home() {
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainName: "bnbt",
+                  chainName: "Mumbai",
                   chainId: chainId,
                   nativeCurrency: {
-                    name: "BSC Testnet",
+                    name: "MATIC",
                     decimals: 18,
-                    symbol: "BNB",
+                    symbol: "MATIC",
                   },
-                  rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"],
+                  rpcUrls: ["https://endpoints.omniatech.io/v1/matic/mumbai/public"],
                 },
               ],
             });
@@ -211,20 +212,21 @@ export default function Home() {
                     </span>
                   </div>
                 </div>
+                
                 <div>
                   <h1 className="text-4xl font-bold tracking-tight sm:text-center sm:text-6xl">
                     Planet NFT
                   </h1>
                   <div className="mt-6 text-lg leading-8 text-gray-600 text-center">
                     <Image
-                      src={moon}
-                      alt="moon"
+                      src={earth}
+                      alt="earth"
                       width={300}
                       className="m-auto py-[50px]"
                     />
                     <br />
 
-                    {currentNetwork === "bnbt" ? (
+                    {currentNetwork === "maticmum" ? (
                       <div>
                         To begin minting a Planet NFT, click the button below.
                       </div>
@@ -236,7 +238,7 @@ export default function Home() {
                           className="text-sky-500 background-transparent font-bold outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 underline"
                           type="button"
                         >
-                          BSC Testnet
+                          Mumbai
                         </button>
                         .
                       </div>
@@ -245,7 +247,7 @@ export default function Home() {
                   <div className="mt-8 flex gap-x-4 sm:justify-center">
                     <button
                       onClick={mint}
-                      disabled={loading || currentNetwork !== "bnbt"}
+                      disabled={loading || currentNetwork !== "maticmum"}
                       className=" disabled:opacity-75 inline-flex items-center gap-x-0.5 rounded-lg bg-indigo-600 px-4 py-1.5 text-base font-semibold leading-7 text-white shadow-sm ring-1 ring-indigo-600 hover:bg-indigo-700 hover:ring-indigo-700"
                     >
                       {loading && <Loading />}
@@ -264,6 +266,8 @@ export default function Home() {
                     )}
                   </div>
                 </div>
+
+                
               </div>
             </div>
           </div>
